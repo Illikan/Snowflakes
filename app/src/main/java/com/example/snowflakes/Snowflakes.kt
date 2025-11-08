@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.annotation.RequiresApi
+import kotlin.math.sin
 import kotlin.random.Random
 
 data class Snowflake(var x: Float, var y: Float, val velocity: Float, val radius: Float, val color: Int)
@@ -56,7 +57,7 @@ open class Snowflakes(ctx: Context) : View(ctx) {
         for (s in snow) {
             val speedFactor = (h - s.y) / h.toFloat()
             s.y += s.velocity * speedFactor * 0.5f
-
+            s.x += (random.nextFloat() - 0.5f) * 10f * sin(random.nextFloat())
             if (s.y > h - s.radius) {
                 s.y = 0f
                 s.x = random.nextFloat() * w
